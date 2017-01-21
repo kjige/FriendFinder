@@ -17,14 +17,14 @@ module.exports = function (app) {
         // var that will have most compatible friend
         var whichFriend = 0;
 
+        // var that stores smallest total difference, start with 100
+        var diff1 = 100;
+
+        // var that stores most current calculated difference
+        var diff2 = 0;
+
         // loop through friends array
         for (var i = 0; i < friendsData.length; i++) {
-
-            // var that stores smallest total difference
-            var diff1 = 0;
-
-            // var to stores most current calculated difference
-            var diff2 = 0;
 
             // calculate difference in scores and totals in diff2
             for (var j = 0; j < friendsData[i].scores.length; j++) {
@@ -47,7 +47,7 @@ module.exports = function (app) {
 
 
         // add user to friends array
-        friendsData.push(user);
+        // friendsData.push(user);
 
         // send response
         res.send(friendsData[whichFriend]);
