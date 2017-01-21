@@ -103,7 +103,7 @@
 
 <script type="text/javascript">
 
-  	// Chosen CSS
+  	// chosen CSS
     var config = {
     	'.chosen-select'           : {},
     	'.chosen-select-deselect'  : {allow_single_deselect:true},
@@ -148,31 +148,29 @@
 	    	var userData = {
 	    		name: $("#name").val(),
 	    		photo: $("#photo").val(),
-	    		scores: [	$("#q1").val(), 
-	    					$("#q2").val(), 
-	    					$("#q3").val(), 
-	    					$("#q4").val(), 
-	    					$("#q5").val(), 
-	    					$("#q6").val(), 
-	    					$("#q7").val(), 
-	    					$("#q8").val(), 
-	    					$("#q9").val(), 
-	    					$("#q10").val()
-	    		]};
-
+	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
+	    	};
+	    	
 	    	// Grab the URL of the website
 	    	var currentURL = window.location.origin;
 
 	    	// AJAX post the data to the friends API. 
 	    	$.post(currentURL + "/data/friends", userData, function(data){
-
+	    		console.log(data);
 	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
-	    		$("#matchName").text(data);
+	    		$("#matchName").text(data.name);
 	    		$('#matchImg').attr("src", data.photo);
 
 		    	// Show the modal with the best match 
-		    	$("#resultsModal").modal('toggle');
+		    	$("#resultsModal").modal('show');
 
+		    	// clear form
+		    	$('#name').val("");
+		    	$('#photo').val("");
+		    	$('#name').val("");
+		    	for (var i = 1; i < 10; i++) {
+		    		$('#q'+i).val("");
+		    	}
 	    	});
 		}
 		else

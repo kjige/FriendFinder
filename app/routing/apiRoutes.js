@@ -7,8 +7,12 @@ module.exports = function (app) {
     });
 
     app.post('/data/friends', function (req, res) {
-        friendsData.push(req.body);
-        // res.json(req.body);
-        // res.json(friendsData[0]);
+        var user = req.body;
+        // for (var i = 0; i < user.scores[].length; i++) {
+        //     user.scores[i] = parseInt(user.scores[i]);
+        // }
+
+        friendsData.push(user);
+        res.send(req.body);
     });
 };
