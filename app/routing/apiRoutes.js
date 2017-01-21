@@ -8,11 +8,48 @@ module.exports = function (app) {
 
     app.post('/data/friends', function (req, res) {
         var user = req.body;
-        // for (var i = 0; i < user.scores[].length; i++) {
-        //     user.scores[i] = parseInt(user.scores[i]);
-        // }
 
+        // convert scores to integers
+        for (var k = 0; k < user.scores.length; k++) {
+            user.scores[k] = parseInt(user.scores[k]);
+        }
+
+        // var that will have most compatible friend
+        var whichFriend = 0;
+
+        // loop through friends array
+        for (var i = 0; i < friendsData.length; i++) {
+
+            // var that stores smallest total difference
+            var diff1 = 0;
+
+            // var to stores most current calculated difference
+            var diff2 = 0;
+
+            // calculate difference in scores and totals in diff2
+            for (var j = 0; j < friendsData[i].scores.length; j++) {
+                diff2 += Math.abs(friendsData[i].scores[j] - user.scores[j]);
+            }
+
+            // compare to find if diff2 is lower than diff1
+            if (diff2 < diff1) {
+
+                // if lower, assign diff1 as diff2
+                diff1 = diff2;
+
+                // reset diff2
+                diff2 = 0;
+
+                // assign friend index
+                whichFriend = i;
+            }
+        }
+
+
+        // add user to friends array
         friendsData.push(user);
-        res.send(req.body);
+
+        // send response
+        res.send(friendsData[whichFriend]);
     });
 };
