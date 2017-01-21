@@ -47,7 +47,7 @@ module.exports = function (app) {
 
 
         // add user to friends array
-        // friendsData.push(user);
+        friendsData.push(user);
 
         // send response
         res.send(friendsData[whichFriend]);
